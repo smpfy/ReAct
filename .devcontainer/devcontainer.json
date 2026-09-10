@@ -1,0 +1,24 @@
+{
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "devcontainer",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/react",
+  "updateRemoteUserUID": true,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "files.exclude": {
+          "**/.devcontainer": true
+        },
+        "python.defaultInterpreterPath": "${containerEnv:UV_WORKING_DIR}/.venv/bin/python",
+        "remote.autoForwardPorts": false
+      }
+    }
+  },
+  "onCreateCommand": "sudo chown -R vscode:vscode /react /home/vscode",
+  "updateContentCommand": "uv sync"
+}

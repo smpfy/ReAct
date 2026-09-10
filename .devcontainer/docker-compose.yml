@@ -1,0 +1,22 @@
+services:
+  devcontainer:
+    build: .
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    env_file:
+      - ../.env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - UV_DEV=0
+      - UV_NO_DEV=1
+      - UV_CACHE_DIR=/home/vscode/.cache/uv
+      - UV_WORKING_DIR=/react
+      - UV_LINK_MODE=symlink #copy
+    volumes:
+      - ..:/react:cached
+      - venv:/react/.venv
+      - uv-cache:/home/vscode/.cache/uv
+    command: sleep infinity
+    network_mode: "host"
+volumes:
+  venv:
+  uv-cache:
